@@ -6,22 +6,22 @@ jets:
     - HadronConeExclTruthLabelID
     - HadronConeExclExtendedTruthLabelID
     - HadronConeExclTruthLabelPt
-    - HadronConeExclTruthLabelLxy
-    - HadronConeExclTruthLabelDR
-    - HadronGhostTruthLabelID
-    - HadronGhostExtendedTruthLabelID
-    - HadronGhostTruthLabelPt
-    - HadronGhostTruthLabelLxy
-    - HadronGhostTruthLabelDR
+    #- HadronConeExclTruthLabelLxy
+    #- HadronConeExclTruthLabelDR
+    #- HadronGhostTruthLabelID
+    #- HadronGhostExtendedTruthLabelID
+    #- HadronGhostTruthLabelPt
+   #- HadronGhostTruthLabelLxy
+    #- HadronGhostTruthLabelDR
     - pt
     - eta
     - mass
-    - n_tracks
+    #- n_tracks
     - n_truth_promptLepton
     - eventNumber
-    - jetFoldHash
+    #- jetFoldHash
 
-tracks:
+tracks_loose:
   inputs:
     - d0
     - z0SinTheta
@@ -43,10 +43,10 @@ tracks:
     - numberOfPixelSplitHits
     - numberOfSCTSharedHits
     - leptonID
-  labels:
-    - ftagTruthOriginLabel
-    - ftagTruthTypeLabel
-    - ftagTruthVertexIndex
+  #labels:
+  #  - ftagTruthOriginLabel
+  #  - ftagTruthTypeLabel
+    #- ftagTruthVertexIndex
 
 #flow:
 #  inputs:

@@ -1,0 +1,111 @@
+# In this config, we don't have seperate samples for r2 or r3, we just combine them
+
+WZ_00_EW: &WZ_00_EW
+  name: WZ_00_EW
+  equal_jets: False
+  pattern: /afs/cern.ch/work/a/anburger/WZMiscScripts/Samples/combined_data_EW_W0Z0.h5
+
+WZ_0T_EW: &WZ_0T_EW
+  name: WZ_0T_EW
+  equal_jets: False
+  pattern: /afs/cern.ch/work/a/anburger/WZMiscScripts/Samples/combined_data_EW_W0ZT.h5
+
+WZ_T0_EW: &WZ_T0_EW
+  name: WZ_T0_EW
+  equal_jets: False
+  pattern: /afs/cern.ch/work/a/anburger/WZMiscScripts/Samples/combined_data_EW_WTZ0.h5
+
+WZ_TT_EW: &WZ_TT_EW
+  name: WZ_TT_EW
+  equal_jets: False
+  pattern: /afs/cern.ch/work/a/anburger/WZMiscScripts/Samples/combined_data_EW_WTZT.h5
+
+
+
+global_cuts:
+  train:
+    - [eventNumber, "%10<=", 7]
+  val:
+    - [eventNumber, "%10==", 8]
+  test:
+    - [eventNumber, "%10==", 9]
+    
+       
+
+inclusive: &inclusive
+  name: inclusive
+  cuts: []
+
+components:
+  - region:
+      <<: *inclusive
+    sample:
+      <<: *WZ_00_EW
+    flavours: [W0Z0]
+    num_jets: 10_000 
+
+  - region:
+      <<: *inclusive
+    sample:
+      <<: *WZ_0T_EW
+    flavours: [W0ZT]
+    num_jets: 10_000 
+
+  - region:
+      <<: *inclusive
+    sample:
+      <<: *WZ_TT_EW
+    flavours: [WTZT]
+    num_jets:  10_000  
+
+    
+  - region:
+      <<: *inclusive
+    sample:
+      <<: *WZ_T0_EW
+    flavours: [WTZ0]
+    num_jets:  10_000
+
+ 
+
+resampling:
+  target: W0Z0
+  method: none
+  sampling_fraction: auto
+  variables:
+    MET_phi:
+      bins: [[-4,4,20]]
+ 
+# note: sensible defaults are defined in the PreprocessingConfig constructor
+global:
+  jets_name: 'bosons'
+  batch_size: 4_000
+  num_jets_estimate: 25_000
+  base_dir: /afs/cern.ch/work/a/anburger/UPPWZ/umami-preprocessing/out
+  ntuple_dir: /afs/cern.ch/work/a/anburger/WZMiscScripts/Samples/
+  
+  
+
+variables:
+  bosons:
+    inputs:
+      - cosThetaZ
+      - cosThetaW
+      - eventNumber    
+      - dPhiWZ
+      - cosThetaV  
+      - mcweight
+    labels:
+      - dibosonPol
+  leptons:
+    inputs:
+      - pt_lepton
+      - eta_lepton 
+      - phi_lepton
+  jets:
+    inputs:
+      - pt_jets
+      - eta_jets
+      - phi_jets
+
+
