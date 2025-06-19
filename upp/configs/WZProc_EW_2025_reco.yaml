@@ -79,7 +79,7 @@ resampling:
 # note: sensible defaults are defined in the PreprocessingConfig constructor
 global:
   jets_name: 'bosons'
-  batch_size: 10_000
+  batch_size: 50_000
   num_jets_estimate: 800_000
   base_dir: /afs/cern.ch/work/a/anburger/UPPWZ/umami-preprocessing/out
   ntuple_dir: /afs/cern.ch/work/a/anburger/WZMiscScripts/SamplesNew/
